@@ -1,6 +1,6 @@
 {
   "name": "vite-asset-manifest",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Vite 8 plugin that emits an asset manifest (manifest.json) mapping source filenames to hashed output paths. API-compatible port of rspack-manifest-plugin / webpack-manifest-plugin for backend asset pipelines (Rails, Phoenix, Django, Laravel, server-rendered apps).",
   "license": "MIT",
   "author": "İlyas Akın <ashnwor@gmail.com>",
