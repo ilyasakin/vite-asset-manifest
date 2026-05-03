@@ -1,0 +1,56 @@
+# Dependencies
+node_modules
+.pnpm-store
+.npm
+.yarn
+
+# Build output
+dist
+build
+out
+
+# Test / coverage
+coverage
+.nyc_output
+*.lcov
+.vitest
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Editor / IDE
+.vscode
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea
+*.swp
+*.swo
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Cache
+.cache
+.eslintcache
+.tsbuildinfo
+*.tsbuildinfo
+
+# Temporary
+tmp
+temp
+*.tmp
+scratch-*.mjs

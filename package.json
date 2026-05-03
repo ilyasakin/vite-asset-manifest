@@ -1,0 +1,53 @@
+{
+  "name": "vite-asset-manifest",
+  "version": "0.1.0",
+  "description": "A Vite plugin for generating an asset manifest. Vite 8 equivalent of rspack-manifest-plugin / webpack-manifest-plugin.",
+  "license": "MIT",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "typecheck": "tsc --project tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "peerDependencies": {
+    "vite": "^8.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.6.0",
+    "vite": "^8.0.0",
+    "vitest": "^2.1.0"
+  },
+  "keywords": [
+    "vite",
+    "vite-plugin",
+    "manifest",
+    "asset-manifest",
+    "rspack-manifest-plugin",
+    "webpack-manifest-plugin"
+  ],
+  "packageManager": "pnpm@11.0.3",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  }
+}
