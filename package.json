@@ -22,7 +22,9 @@
     "build": "tsc --project tsconfig.json",
     "typecheck": "tsc --project tsconfig.json --noEmit",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "example:build": "pnpm -r build",
+    "example:dev": "pnpm --filter basic-example dev"
   },
   "peerDependencies": {
     "vite": "^8.0.0"

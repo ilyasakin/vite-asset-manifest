@@ -21,6 +21,19 @@ importers:
         specifier: ^2.1.0
         version: 2.1.9(@types/node@22.19.17)(lightningcss@1.32.0)
 
+  examples/basic:
+    dependencies:
+      vite-asset-manifest:
+        specifier: workspace:*
+        version: link:../..
+    devDependencies:
+      typescript:
+        specifier: ^5.6.0
+        version: 5.9.3
+      vite:
+        specifier: ^8.0.0
+        version: 8.0.10(@types/node@22.19.17)
+
 packages:
 
   '@emnapi/core@1.10.0':
