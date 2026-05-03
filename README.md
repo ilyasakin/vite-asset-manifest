@@ -34,13 +34,6 @@ export default defineConfig({
 });
 ```
 
-`RspackManifestPlugin` and `WebpackManifestPlugin` are exported as aliases
-of `ViteManifestPlugin` for drop-in compatibility:
-
-```ts
-import { RspackManifestPlugin } from 'vite-asset-manifest';
-```
-
 With the default options the build emits `manifest.json` into the configured
 `build.outDir`:
 

@@ -183,10 +183,5 @@ export function ViteManifestPlugin(opts: ManifestPluginOptions = {}): ManifestPl
   return plugin;
 }
 
-/** Alias preserved for parity with rspack-manifest-plugin. */
-export const RspackManifestPlugin = ViteManifestPlugin;
-/** Alias preserved for parity with webpack-manifest-plugin. */
-export const WebpackManifestPlugin = ViteManifestPlugin;
-
 /** Default export so consumers can `import ManifestPlugin from 'vite-asset-manifest'`. */
 export default ViteManifestPlugin;

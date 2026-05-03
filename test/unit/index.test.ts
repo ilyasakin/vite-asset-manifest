@@ -1,11 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
-import {
-  RspackManifestPlugin,
-  ViteManifestPlugin,
-  WebpackManifestPlugin,
-  getCompilerHooks
-} from '../../src/index.js';
+import { ViteManifestPlugin, getCompilerHooks } from '../../src/index.js';
 import {
   createWorkDir,
   readManifest,
@@ -27,11 +22,6 @@ describe('public exports', () => {
   it('exposes ViteManifestPlugin and getCompilerHooks', () => {
     expect(typeof ViteManifestPlugin).toBe('function');
     expect(typeof getCompilerHooks).toBe('function');
-  });
-
-  it('aliases RspackManifestPlugin and WebpackManifestPlugin to the same factory', () => {
-    expect(RspackManifestPlugin).toBe(ViteManifestPlugin);
-    expect(WebpackManifestPlugin).toBe(ViteManifestPlugin);
   });
 
   it('returns a stable hook bag per plugin instance', () => {

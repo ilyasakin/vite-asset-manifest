@@ -3,9 +3,7 @@ import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
 import {
-  RspackManifestPlugin,
   ViteManifestPlugin,
-  WebpackManifestPlugin,
   getCompilerHooks,
   type Manifest
 } from '../../src/index.js';
@@ -88,22 +86,4 @@ describe('end-to-end Vite build', () => {
     expect(received).toEqual({ 'main.js': 'main.js' });
   });
 
-  it('alias factories produce plugins indistinguishable from ViteManifestPlugin', async () => {
-    const a = await runBuild(workDir, {
-      files: { 'src/file.js': "export default 'file';\n" },
-      input: { main: 'src/file.js' },
-      plugin: RspackManifestPlugin({ publicPath: '' })
-    });
-    expect(readManifest(a.manifestPath)).toEqual({ 'main.js': 'main.js' });
-
-    removeWorkDir(workDir);
-    workDir = createWorkDir();
-
-    const b = await runBuild(workDir, {
-      files: { 'src/file.js': "export default 'file';\n" },
-      input: { main: 'src/file.js' },
-      plugin: WebpackManifestPlugin({ publicPath: '' })
-    });
-    expect(readManifest(b.manifestPath)).toEqual({ 'main.js': 'main.js' });
-  });
 });
