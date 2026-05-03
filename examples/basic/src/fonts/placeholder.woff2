@@ -1,0 +1,1 @@
+placeholder font fixture used only so the asset pipeline emits a .woff2 entry; not a real font file.

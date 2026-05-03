@@ -1,6 +1,12 @@
+@font-face {
+  font-family: "Placeholder";
+  src: url("./fonts/placeholder.woff2") format("woff2");
+  font-display: swap;
+}
+
 :root {
   color-scheme: light dark;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-family: "Placeholder", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
 body {
