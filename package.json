@@ -33,7 +33,9 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "example:build": "pnpm -r build",
-    "example:dev": "pnpm --filter basic-example dev"
+    "example:dev": "pnpm --filter basic-example dev",
+    "prepack": "npm run build",
+    "test:package": "node scripts/check-package.mjs"
   },
   "peerDependencies": {
     "vite": "^8.0.0"
@@ -83,11 +85,6 @@
   },
   "packageManager": "pnpm@11.0.3",
   "engines": {
-    "node": ">=20.0.0"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild"
-    ]
+    "node": "^20.19.0 || >=22.12.0"
   }
 }

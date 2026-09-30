@@ -16,7 +16,8 @@ Vite.
 npm install -D vite-asset-manifest
 ```
 
-Peer dependency: `vite ^8.0.0`.
+Peer dependency: `vite ^8.0.0`. Requires Node.js `^20.19.0 || >=22.12.0`,
+matching Vite 8.
 
 ## Usage
 
@@ -138,6 +139,25 @@ case.
    so the plugin only has effect during `vite build`. The `writeToFileEmit`
    option still applies during build (useful for absolute `fileName` paths
    that point outside `outDir`).
+
+## Development
+
+Use Node.js 22.13+ (Node.js 24 LTS recommended) and the pnpm version pinned
+in `package.json`. pnpm 11 does not run on Node.js 20; consumers can still use
+the plugin on Node.js 20.19+ with a compatible package manager.
+
+```bash
+pnpm install --frozen-lockfile
+pnpm typecheck
+pnpm test
+pnpm build
+pnpm test:package
+pnpm --filter basic-example build
+```
+
+`test:package` builds and packs the package, checks its published file list,
+and imports the packed ESM exports in an isolated, offline consumer. Packing
+always rebuilds `dist` through the `prepack` lifecycle hook.
 
 ## License
 

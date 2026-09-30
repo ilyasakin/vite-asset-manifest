@@ -20,6 +20,30 @@ afterEach(() => {
 });
 
 describe('multiple sequential builds (Vite analog of multi-compiler mode)', () => {
+  it('does not exclude assets that were manifest names in a previous build', async () => {
+    await runBuild(workDir, {
+      files: { 'src/file.js': "console.log('first');\n" },
+      input: { main: 'src/file.js' },
+      manifest: { fileName: 'data.json' }
+    });
+
+    const { manifestPath } = await runBuild(workDir, {
+      files: { 'src/file.js': "console.log('second');\n" },
+      input: { main: 'src/file.js' },
+      extraPlugins: [{
+        name: 'emit-data',
+        buildStart() {
+          this.emitFile({ type: 'asset', fileName: 'data.json', source: '{}' });
+        }
+      }]
+    });
+
+    expect(readManifest(manifestPath)).toEqual({
+      'main.js': 'main.js',
+      'data.json': 'data.json'
+    });
+  });
+
   it('accumulates manifest entries across builds when a shared seed object is passed', async () => {
     const seed: Record<string, unknown> = {};
     const totalBuilds = 5;
