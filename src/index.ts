@@ -66,13 +66,8 @@ const defaults: InternalOptions = {
 
 const PLUGIN_NAME = 'vite-asset-manifest';
 
-/**
- * Process-level set of manifest output paths produced by this plugin. When two
- * instances coexist, each instance's `generateBundle` sees the other's emitted
- * manifest as an asset in the bundle. We filter those sibling emissions out so
- * they don't leak into one another's manifest contents.
- */
-const knownManifestAssetIds = new Set<string>();
+/** Manifest names are shared only by plugin instances in the same Vite build. */
+const manifestAssetIdsByConfig = new WeakMap<ResolvedConfig, Set<string>>();
 
 const ensureTrailingSlash = (value: string): string =>
   value.endsWith('/') ? value : `${value}/`;
@@ -101,6 +96,12 @@ export function ViteManifestPlugin(opts: ManifestPluginOptions = {}): ManifestPl
 
     configResolved(config) {
       resolvedConfig = config;
+      let manifestAssetIds = manifestAssetIdsByConfig.get(config);
+      if (!manifestAssetIds) {
+        manifestAssetIds = new Set<string>();
+        manifestAssetIdsByConfig.set(config, manifestAssetIds);
+      }
+      resolvedManifestAssetId = undefined;
       // Pre-register the manifest path so sibling instances filter our output
       // out of their bundles.
       const outDir = resolve(config.root ?? process.cwd(), config.build.outDir);
@@ -110,7 +111,7 @@ export function ViteManifestPlugin(opts: ManifestPluginOptions = {}): ManifestPl
       const id = relative(outDir, manifestFileName);
       if (!id.startsWith('..') && !isAbsolute(id)) {
         resolvedManifestAssetId = id;
-        knownManifestAssetIds.add(id);
+        manifestAssetIds.add(id);
       }
     },
 
@@ -138,7 +139,7 @@ export function ViteManifestPlugin(opts: ManifestPluginOptions = {}): ManifestPl
       // ours. (Our own emission happens later in this hook, so it isn't in the
       // bundle yet.)
       let files = collectFiles(bundle, options).filter(
-        (f) => !knownManifestAssetIds.has(f.path)
+        (f) => !manifestAssetIdsByConfig.get(config)?.has(f.path)
       );
 
       files = files.map((file) => {
